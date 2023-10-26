@@ -210,9 +210,10 @@ min-height: fit-content;
 
 .icon {
   cursor: pointer;
+  margin-bottom: 17px;
   height: 2rem;
+  margin-left: 18px;
 }
-
 /* BUTTONS */
 
 .btn-container {
@@ -259,4 +260,63 @@ min-height: fit-content;
 
 .btn-container {
   gap: 1rem;
+}
+
+/* ABOUT SECTION */
+
+/* ABOUT SECTION */
+
+#about {
+  position: relative;
+}
+
+.about-containers {
+  gap: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.about-details-container {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.about-containers,
+.about-details-container {
+  display: flex;
+  margin-left: 40px;
+}
+
+.about-pic {
+  width: 450px;
+  height: 450px;
+  border-radius: 2rem;
+  margin-right: 20px;
+}
+
+.arrow {
+  position: absolute;
+  right: -5rem;
+  bottom: 2.5rem;
+}
+
+.details-container {
+  padding: 1.5rem;
+  flex: 1;
+  background: white;
+  border-radius: 2rem;
+  border: rgb(53, 53, 53) 0.1rem solid;
+  border-color: rgb(163, 163, 163);
+  text-align: center;
+}
+
+.section-container {
+  gap: 4rem;
+  height: 80%;
+}
+
+.section__pic-container {
+  height: 400px;
+  width: 400px;
+  margin: auto 0;
 }
