@@ -169,12 +169,17 @@ min-height: fit-content;
   height: 80vh;
 }
 
-.section__picture-contatiner {
+.section__pic-container {
   display: flex;
   height: 400px;
   width: 400px;
   margin: auto 0;
 }
+
+#round img {
+  border-radius: 50%; /* This will round the image */
+}
+
 
 .section__text {
   align-self: center;
@@ -210,10 +215,9 @@ min-height: fit-content;
 
 .icon {
   cursor: pointer;
-  margin-bottom: 17px;
   height: 2rem;
-  margin-left: 18px;
 }
+
 /* BUTTONS */
 
 .btn-container {
@@ -264,8 +268,6 @@ min-height: fit-content;
 
 /* ABOUT SECTION */
 
-/* ABOUT SECTION */
-
 #about {
   position: relative;
 }
@@ -284,14 +286,10 @@ min-height: fit-content;
 .about-containers,
 .about-details-container {
   display: flex;
-  margin-left: 40px;
 }
 
 .about-pic {
-  width: 450px;
-  height: 450px;
   border-radius: 2rem;
-  margin-right: 20px;
 }
 
 .arrow {
