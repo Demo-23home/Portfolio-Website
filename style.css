@@ -17,13 +17,16 @@ html {
 
 p {
   color: rgb(85, 85, 85);
+  line-height: 1.6;
 }
 
 /* TRANSITION */
 
 a,
-.btn{
-  transition: all 300ms ease;
+.btn {
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 /* DESKTOP NAV */
@@ -36,7 +39,7 @@ nav,
 nav {
   justify-content: space-around;
   align-items: center;
-  height: 17vh;
+  padding: 1.5rem 2rem;
 }
 
 .nav-links {
@@ -80,7 +83,7 @@ a:hover {
 .hamburger-icon {
   display: flex;
   justify-content: space-between;
-  flex-direction:column;
+  flex-direction: column;
   height: 24px;
   width: 30px;
   cursor: pointer;
@@ -134,26 +137,19 @@ a:hover {
   transform: rotate(-45deg) translate(10px, -5px);
 }
 
-.hamburger-icon span:first-child {
+.hamburger-icon span {
   transform: none;
-}
-
-.hamburger-icon span:first-child {
   opacity: 1;
-}
-
-.hamburger-icon span:first-child {
-  transform: none;
 }
 
 /* SECTIONS */
 
 section {
-padding-top: 4vh;
-height: 96vh;
-margin: 0 10rem;
-box-sizing: border-box;
-min-height: fit-content;
+  padding: 4rem 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  box-sizing: border-box;
+  min-height: fit-content;
 }
 
 .section-container {
@@ -165,21 +161,25 @@ min-height: fit-content;
 #profile {
   display: flex;
   justify-content: center;
-  gap: 5rem;
-  height: 80vh;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
 }
 
 .section__pic-container {
-  display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1/1;
+}
+.section__pic-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #round img {
   border-radius: 50%; /* This will round the image */
 }
-
 
 .section__text {
   align-self: center;
@@ -201,6 +201,7 @@ min-height: fit-content;
 
 .title {
   font-size: 3rem;
+  letter-spacing: 1px;
   text-align: center;
 }
 
@@ -228,7 +229,9 @@ min-height: fit-content;
 
 .btn {
   font-weight: 600;
-  transition: all 300ms ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
@@ -306,17 +309,21 @@ min-height: fit-content;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
   text-align: center;
+
+  /* NEW */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.details-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .section-container {
   gap: 4rem;
   height: 80%;
-}
-
-.section__pic-container {
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
 }
 
 /* EXPERIENCE SECTION */
@@ -349,7 +356,7 @@ min-height: fit-content;
 
 article {
   display: flex;
-  width: 10rem;
+  flex: 1 1 200px;
   justify-content: space-around;
   gap: 0.5rem;
 }
@@ -391,7 +398,7 @@ article .icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 70vh;
+  padding: 4rem 2rem;
 }
 
 .contact-info-upper-container {
@@ -400,7 +407,7 @@ article .icon {
   border-radius: 2rem;
   border: rgb(53, 53, 53) 0.1rem solid;
   border-color: rgb(163, 163, 163);
-  background: (250, 250, 250);
+  background: rgb(250, 250, 250);
   margin: 2rem auto;
   padding: 0.5rem;
 }
@@ -428,10 +435,64 @@ article .icon {
 /* FOOTER SECTION */
 
 footer {
-  height: 26vh;
+  padding: 2rem 1rem;
   margin: 0 1rem;
 }
 
 footer p {
   text-align: center;
+}
+
+.details-container {
+  flex: 1 1 300px;
+}
+
+.about-containers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1.5rem;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+}
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.nav-links a.active {
+  color: black;
+  font-weight: 600;
+}
+
+#about,
+#projects {
+  background: #f9f9f9;
+}
+section {
+  padding: 5rem 2rem;
+}
+
+.project-img {
+  object-fit: cover;
+}
+
+.details-container {
+  cursor: pointer;
 }
