@@ -1,57 +1,57 @@
-/* GENERAL */
+/* ============================================================
+   IMPORTS & CSS VARIABLES
+   ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+:root {
+  --bg: #ffffff;
+  --text: #111;
+  --secondary: #555;
+  --card: rgba(255, 255, 255, 0.7);
+  --border: rgba(200, 200, 200, 0.3);
+}
+
+body.dark-mode {
+  --bg: #0f0f0f;
+  --text: #ffffff;
+  --secondary: #e0e0e0;
+  --card: rgba(50, 50, 50, 0.95);
+  --border: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode nav {
+  background: rgba(15, 15, 15, 0.85);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
 
 * {
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
 p {
-  color: rgb(85, 85, 85);
-  line-height: 1.6;
-}
-
-/* TRANSITION */
-
-a,
-.btn {
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-}
-
-/* DESKTOP NAV */
-
-nav,
-.nav-links {
-  display: flex;
-}
-
-nav {
-  justify-content: space-around;
-  align-items: center;
-  padding: 1.5rem 2rem;
-}
-
-.nav-links {
-  gap: 2rem;
-  list-style: none;
-  font-size: 1.5rem;
+  color: var(--secondary);
+  line-height: 1.7;
 }
 
 a {
-  color: black;
+  color: var(--text);
   text-decoration: none;
-  text-decoration-color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 a:hover {
@@ -59,6 +59,57 @@ a:hover {
   text-decoration: underline;
   text-underline-offset: 1rem;
   text-decoration-color: rgb(181, 181, 181);
+}
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 0.3s ease;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ddd;
+  border-top: 4px solid black;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   NAVIGATION — DESKTOP
+   ============================================================ */
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--card);
+  backdrop-filter: blur(10px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  font-size: 1.5rem;
 }
 
 .logo {
@@ -69,7 +120,21 @@ a:hover {
   cursor: default;
 }
 
-/* HAMBURGER MENU */
+nav a.active {
+  color: #0077ff;
+  font-weight: bold;
+}
+
+#theme-toggle {
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* ============================================================
+   NAVIGATION — HAMBURGER (MOBILE)
+   ============================================================ */
 
 #hamburger-nav {
   display: none;
@@ -93,36 +158,9 @@ a:hover {
   width: 100%;
   height: 2px;
   background-color: black;
-  transition: all 0.3 ease-in-out;
-}
-
-.menu-links {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  width: fit-content;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.3 ease-in-out;
-}
-
-.menu-links a {
-  display: block;
-  padding: 10px;
-  text-align: center;
-  font-size: 1.5rem;
-  color: black;
-  text-decoration: none;
-  transition: all 0.3 ease-in-out;
-}
-
-.menu-links li {
-  list-style: none;
-}
-
-.menu-links.open {
-  max-height: 300px;
+  transform: none;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
 }
 
 .hamburger-icon.open span:first-child {
@@ -137,26 +175,62 @@ a:hover {
   transform: rotate(-45deg) translate(10px, -5px);
 }
 
-.hamburger-icon span {
-  transform: none;
-  opacity: 1;
+.menu-links {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--bg);
+  width: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
-/* SECTIONS */
+.menu-links.open {
+  max-height: 300px;
+}
+
+.menu-links a {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu-links li {
+  list-style: none;
+}
+
+/* ============================================================
+   LAYOUT — SECTIONS & CONTAINERS
+   ============================================================ */
 
 section {
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
   margin: 0 auto;
   max-width: 1200px;
   box-sizing: border-box;
   min-height: fit-content;
 }
 
-.section-container {
-  display: flex;
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1.5rem;
 }
 
-/* PROFILE SECTION */
+.section-container {
+  display: flex;
+  gap: 4rem;
+  height: 80%;
+}
+
+/* ============================================================
+   PROFILE SECTION
+   ============================================================ */
 
 #profile {
   display: flex;
@@ -171,6 +245,7 @@ section {
   max-width: 350px;
   aspect-ratio: 1/1;
 }
+
 .section__pic-container img {
   width: 100%;
   height: 100%;
@@ -178,7 +253,7 @@ section {
 }
 
 #round img {
-  border-radius: 50%; /* This will round the image */
+  border-radius: 50%;
 }
 
 .section__text {
@@ -196,6 +271,8 @@ section {
 
 .section__text__p2 {
   font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--secondary);
   margin-bottom: 1rem;
 }
 
@@ -203,6 +280,9 @@ section {
   font-size: 3rem;
   letter-spacing: 1px;
   text-align: center;
+  background: linear-gradient(90deg, #0077ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 #socials-container {
@@ -212,14 +292,31 @@ section {
   gap: 1rem;
 }
 
-/* ICONS */
+/* ============================================================
+   ICONS
+   ============================================================ */
 
 .icon {
   cursor: pointer;
   height: 2rem;
 }
 
-/* BUTTONS */
+article .icon {
+  cursor: default;
+  color: var(--text);
+}
+
+.contact-icon {
+  cursor: default;
+}
+
+.email-icon {
+  height: 2.5rem;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
 
 .btn-container {
   display: flex;
@@ -229,66 +326,63 @@ section {
 
 .btn {
   font-weight: 600;
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
-}
-
-.btn-color-1,
-.btn-color-2 {
-  border: rgb(53, 53, 53) 0.1rem solid;
-}
-
-.btn-color-1:hover,
-.btn-color-2:hover {
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.btn-color-1,
-.btn-color-2:hover {
-  background: rgb(53, 53, 53);
-  color: white;
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Primary */
+.btn-color-1 {
+  background: var(--text);
+  color: var(--bg);
+  border: 1px solid var(--text);
 }
 
 .btn-color-1:hover {
-  background: rgb(0, 0, 0);
+  background: transparent;
+  color: var(--text);
 }
 
+/* Outline */
 .btn-color-2 {
-  background: none;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
 }
 
 .btn-color-2:hover {
-  border: rgb(255, 255, 255) 0.1rem solid;
+  background: var(--text);
+  color: var(--bg);
+  border-color: white;
 }
 
-.btn-container {
-  gap: 1rem;
-}
-
-/* ABOUT SECTION */
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
 
 #about {
   position: relative;
+  background: var(--bg);
 }
 
 .about-containers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
-.about-details-container {
-  justify-content: center;
-  flex-direction: column;
-}
-
-.about-containers,
 .about-details-container {
   display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .about-pic {
@@ -301,32 +395,46 @@ section {
   bottom: 2.5rem;
 }
 
-.details-container {
+/* ============================================================
+   CARDS (details-container / color-container)
+   ============================================================ */
+
+.details-container,
+.color-container {
   padding: 1.5rem;
-  flex: 1;
-  background: white;
-  border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
+  flex: 1 1 300px;
+  border-radius: 1.5rem;
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
   text-align: center;
-
-  /* NEW */
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.details-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+.details-container:hover,
+.color-container:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
-.section-container {
-  gap: 4rem;
-  height: 80%;
+body.dark-mode .details-container:hover,
+body.dark-mode .color-container:hover {
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.08);
 }
 
-/* EXPERIENCE SECTION */
+.details-container p,
+.details-container h2,
+.details-container h3,
+.details-container a,
+.details-container button {
+  color: var(--text);
+}
+
+/* ============================================================
+   EXPERIENCE SECTION
+   ============================================================ */
 
 #experience {
   position: relative;
@@ -361,25 +469,25 @@ article {
   gap: 0.5rem;
 }
 
-article .icon {
-  cursor: default;
-}
-
-/* PROJECTS SECTION */
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
 
 #projects {
   position: relative;
-}
-
-.color-container {
-  border-color: rgb(163, 163, 163);
-  background: rgb(250, 250, 250);
+  background: var(--bg);
 }
 
 .project-img {
   border-radius: 2rem;
   width: 90%;
   height: 90%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.details-container:hover .project-img {
+  transform: scale(1.08);
 }
 
 .project-title {
@@ -392,7 +500,9 @@ article .icon {
   border-color: rgb(163, 163, 163);
 }
 
-/* CONTACT */
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
 
 #contact {
   display: flex;
@@ -405,11 +515,11 @@ article .icon {
   display: flex;
   justify-content: center;
   border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
-  background: rgb(250, 250, 250);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
   margin: 2rem auto;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .contact-info-container {
@@ -424,15 +534,22 @@ article .icon {
   font-size: larger;
 }
 
-.contact-icon {
-  cursor: default;
+.contact-info-container p,
+.contact-info-container a {
+  color: var(--text);
 }
 
-.email-icon {
-  height: 2.5rem;
+.contact-info-container a {
+  text-decoration: none;
 }
 
-/* FOOTER SECTION */
+.contact-info-container a:hover {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
 
 footer {
   padding: 2rem 1rem;
@@ -443,56 +560,28 @@ footer p {
   text-align: center;
 }
 
-.details-container {
-  flex: 1 1 300px;
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px) scale(0.98);
+  transition: all 0.8s ease;
 }
 
-.about-containers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 1.5rem;
+.section-hidden {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
 }
 
-.btn:hover {
-  transform: scale(1.05);
-}
-
-nav {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 1000;
-}
-.btn {
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.nav-links a.active {
-  color: black;
-  font-weight: 600;
-}
-
-#about,
-#projects {
-  background: #f9f9f9;
-}
-section {
-  padding: 5rem 2rem;
-}
-
-.project-img {
-  object-fit: cover;
-}
-
-.details-container {
-  cursor: pointer;
+.section-show {
+  opacity: 1;
+  transform: translateY(0);
 }
