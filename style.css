@@ -24,6 +24,13 @@ body.dark-mode nav {
   background: rgba(15, 15, 15, 0.85);
 }
 
+body.dark-mode .arrow {
+  filter: invert(1);
+}
+
+body.dark-mode #socials-container .icon {
+  filter: invert(1);
+}
 /* ============================================================
    RESET & BASE
    ============================================================ */
