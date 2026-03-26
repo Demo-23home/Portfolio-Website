@@ -31,6 +31,9 @@ body.dark-mode .arrow {
 body.dark-mode #socials-container .icon {
   filter: invert(1);
 }
+body.dark-mode #contact .contact-icon {
+  filter: invert(1);
+}
 /* ============================================================
    RESET & BASE
    ============================================================ */
