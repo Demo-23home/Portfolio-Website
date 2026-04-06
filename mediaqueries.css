@@ -1,4 +1,26 @@
 /* ============================= */
+/* BASE STYLES FOR SECTION ITEMS */
+/* ============================= */
+section .section-item {
+  font-size: 1rem; /* default base size */
+}
+
+/* ============================= */
+/* 🔼 EXTRA LARGE SCREENS (>= 1400px) */
+/* ============================= */
+@media screen and (min-width: 1401px) {
+  section .section-item {
+    font-size: 1.2rem; /* larger desktop */
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  section .section-item {
+    font-size: 1.4rem; /* ultra-wide screens */
+  }
+}
+
+/* ============================= */
 /* 🔽 LARGE SCREENS (<= 1400px) */
 /* ============================= */
 @media screen and (max-width: 1400px) {
@@ -18,6 +40,11 @@
 
   .about-containers {
     flex-wrap: wrap;
+  }
+
+  /* Experience / section items */
+  section .section-item {
+    font-size: 1.1rem;
   }
 }
 
@@ -82,6 +109,11 @@
   .experience-details-container {
     margin-top: 1rem;
   }
+
+  /* Section items */
+  section .section-item {
+    font-size: 1.05rem;
+  }
 }
 
 /* ============================= */
@@ -111,6 +143,11 @@
 
   .article-container {
     gap: 1.5rem;
+  }
+
+  /* Section items */
+  section .section-item {
+    font-size: 1rem;
   }
 }
 
@@ -144,6 +181,11 @@
 
   .section__text__p2 {
     font-size: clamp(1rem, 4vw, 1.2rem);
+  }
+
+  /* Section items – mobile keeps smaller size */
+  section .section-item {
+    font-size: 0.95rem;
   }
 
   /* BUTTONS */
@@ -236,6 +278,11 @@
 
   .section__pic-container {
     max-width: 150px;
+  }
+
+  /* Section items */
+  section .section-item {
+    font-size: 0.9rem;
   }
 }
 
