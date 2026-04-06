@@ -150,3 +150,11 @@ const setActiveNav = () => {
 };
 
 window.addEventListener("scroll", setActiveNav);
+
+const favicon = document.querySelector("link[rel='icon']");
+
+if (document.body.classList.contains("dark-mode")) {
+  favicon.href = "./assets/code (1).png";
+} else {
+  favicon.href = "./assets/code.png";
+}
