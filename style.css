@@ -256,8 +256,9 @@ section {
 }
 .section__pic-container {
   width: 100%;
-  max-width: 300px;
-  height: 600px; /* taller rectangle */
+  max-width: 280px;
+  aspect-ratio: 3 / 4; /* 🔥 responsive instead of fixed height */
+  height: auto;
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -489,13 +490,6 @@ body.dark-mode .color-container:hover {
   justify-content: space-around;
 }
 
-article {
-  display: flex;
-  flex: 1 1 200px;
-  justify-content: space-around;
-  gap: 0.5rem;
-}
-
 /* ============================================================
    PROJECTS SECTION
    ============================================================ */
@@ -618,4 +612,120 @@ footer p {
   background: none;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================= */
+/* 🔧 EXPERIENCE TEXT FIX */
+/* ============================= */
+
+/* Ensure flex items can shrink */
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Text inside article */
+article p,
+article h3 {
+  overflow-wrap: break-word; /* modern */
+  word-wrap: break-word; /* fallback */
+  word-break: break-word; /* 🔥 ensures long words break */
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* Optional: prevent icons from shrinking */
+article img,
+article svg {
+  flex-shrink: 0;
+}
+
+/* ============================= */
+/* 🎯 EXPERIENCE TEXT OPTIMIZATION */
+/* ============================= */
+
+/* Skill title (e.g. Django, React) */
+article h3 {
+  font-size: 0.95rem; /* 🔥 reduced from default */
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Skill level text (e.g. Intermediate) */
+article p {
+  font-size: 0.8rem; /* 🔥 smaller secondary text */
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Icon sizing */
+article img,
+article svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================= */
+/* 🎯 EXPERIENCE TEXT OPTIMIZATION */
+/* ============================= */
+
+/* Skill title (e.g. Django, React) */
+article h3 {
+  font-size: 0.95rem; /* 🔥 reduced from default */
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Skill level text (e.g. Intermediate) */
+article p {
+  font-size: 0.8rem; /* 🔥 smaller secondary text */
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Icon sizing */
+article img,
+article svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================= */
+/* ✅ FINAL EXPERIENCE FIX */
+/* ============================= */
+
+article {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+/* Fix icon sizing */
+article .icon,
+article img,
+article svg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Fix text alignment */
+article div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
