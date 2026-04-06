@@ -1,92 +1,117 @@
-// ===============================
-// 🌙 DARK MODE (with persistence)
-// ===============================
-const toggleBtn = document.getElementById("theme-toggle");
+// ======================================================
+// ⚙️ GLOBAL CONSTANTS
+// ======================================================
+const THEME_KEY = "theme";
+const DARK_CLASS = "dark-mode";
 
-// Load saved theme
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
+// ======================================================
+// 🌙 DARK MODE (clean + scalable + icon sync)
+// ======================================================
+const themeButtons = document.querySelectorAll(
+  "#theme-toggle, #theme-toggle-mobile"
+);
+
+// Apply saved theme
+const savedTheme = localStorage.getItem(THEME_KEY);
+if (savedTheme === "dark") {
+  document.body.classList.add(DARK_CLASS);
 }
 
-// Toggle theme
-if (toggleBtn) {
-  toggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
+// Update button icons
+const updateThemeIcons = () => {
+  const isDark = document.body.classList.contains(DARK_CLASS);
 
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-    } else {
-      localStorage.setItem("theme", "light");
+  themeButtons.forEach((btn) => {
+    if (btn) {
+      btn.textContent = isDark ? "☀️" : "🌙";
     }
   });
-}
+};
 
-// ===============================
-// 🎬 PAGE LOADER
-// ===============================
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if (loader) {
-    loader.style.opacity = "0";
-    loader.style.pointerEvents = "none";
+// Toggle theme
+const toggleTheme = () => {
+  const isDark = document.body.classList.toggle(DARK_CLASS);
+  localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+  updateThemeIcons();
+};
 
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 300);
+// Attach listeners
+themeButtons.forEach((btn) => {
+  if (btn) {
+    btn.addEventListener("click", toggleTheme);
   }
 });
 
-// ===============================
+// Initial icon state
+updateThemeIcons();
+
+// ======================================================
+// 🎬 PAGE LOADER
+// ======================================================
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+
+  if (!loader) return;
+
+  loader.style.opacity = "0";
+  loader.style.pointerEvents = "none";
+
+  setTimeout(() => {
+    loader.style.display = "none";
+  }, 300);
+});
+
+// ======================================================
 // ⚡ SMOOTH SCROLL (anchor links)
-// ===============================
+// ======================================================
 document.querySelectorAll("a[href^='#']").forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     const targetId = this.getAttribute("href");
 
-    // skip if it's just "#"
     if (!targetId || targetId === "#") return;
 
     const targetElement = document.querySelector(targetId);
 
-    if (targetElement) {
-      e.preventDefault();
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    if (!targetElement) return;
+
+    e.preventDefault();
+
+    targetElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   });
 });
 
-// ===============================
+// ======================================================
 // 🎯 SCROLL REVEAL (IntersectionObserver)
-// ===============================
+// ======================================================
 const revealElements = document.querySelectorAll(
-  ".details-container, .section__text, .title, .text-container",
+  ".details-container, .section__text, .title, .text-container"
 );
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
         entry.target.classList.add("show");
-        revealObserver.unobserve(entry.target); // animate once only
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  },
-);
+        observer.unobserve(entry.target); // animate once
+      });
+    },
+    { threshold: 0.15 }
+  );
 
-revealElements.forEach((el) => {
-  el.classList.add("fade-in");
-  revealObserver.observe(el);
-});
+  revealElements.forEach((el) => {
+    el.classList.add("fade-in");
+    revealObserver.observe(el);
+  });
+}
 
-// ===============================
-// 📱 MOBILE MENU (if you have one)
-// ===============================
+// ======================================================
+// 📱 MOBILE MENU
+// ======================================================
 const menuBtn = document.querySelector(".hamburger-icon");
 const menu = document.querySelector(".menu-links");
 
@@ -97,28 +122,31 @@ if (menuBtn && menu) {
   });
 }
 
-// ===============================
-// 🎨 OPTIONAL: ACTIVE NAV LINK ON SCROLL
-// ===============================
+// ======================================================
+// 🎨 ACTIVE NAV LINK ON SCROLL
+// ======================================================
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
-window.addEventListener("scroll", () => {
+const setActiveNav = () => {
   let current = "";
 
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
 
-    if (scrollY >= sectionTop - sectionHeight / 2) {
+    if (window.scrollY >= sectionTop - sectionHeight / 2) {
       current = section.getAttribute("id");
     }
   });
 
   navLinks.forEach((link) => {
     link.classList.remove("active");
+
     if (link.getAttribute("href") === `#${current}`) {
       link.classList.add("active");
     }
   });
-});
+};
+
+window.addEventListener("scroll", setActiveNav);
