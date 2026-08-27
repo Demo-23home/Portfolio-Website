@@ -12,6 +12,36 @@ const navigation = [
 ];
 
 const heroStack = ['Python', 'Django', 'React', 'Next.js', 'PostgreSQL'];
+const marqueeSkills = [
+  'Python',
+  'Django',
+  'Django REST',
+  'PostgreSQL',
+  'MySQL',
+  'Multi-Tenancy',
+  'Transactions',
+  'Row-Level Locking',
+  'Service-Layer Architecture',
+  'Celery',
+  'Redis',
+  'RabbitMQ',
+  'Django Channels',
+  'WebSockets',
+  'Pytest',
+  'Docker',
+  'Linux',
+  'Nginx',
+  'Gunicorn',
+  'JWT & OAuth',
+  'OpenAPI',
+  'Postman',
+  'CI/CD',
+  'AWS S3',
+  'Cloudinary',
+  'React',
+  'Next.js',
+  'TypeScript',
+];
 const filters = ['All', 'SaaS', 'Platform', 'Commerce'] as const;
 type ProjectFilter = (typeof filters)[number];
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
@@ -406,9 +436,11 @@ export default function Home() {
           <div className="marquee-track">
             {[0, 1].map((copy) => (
               <div className="marquee-content" key={copy}>
-                <span>PYTHON</span><i>✦</i><span>DJANGO</span><i>✦</i>
-                <span>REACT</span><i>✦</i><span>NEXT.JS</span><i>✦</i>
-                <span>POSTGRESQL</span><i>✦</i><span>TYPESCRIPT</span><i>✦</i>
+                {marqueeSkills.map((skill) => (
+                  <span className="marquee-skill" key={skill}>
+                    {skill}<i>✦</i>
+                  </span>
+                ))}
               </div>
             ))}
           </div>
