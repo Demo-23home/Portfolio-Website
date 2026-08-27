@@ -2,6 +2,8 @@
 
 A polished, responsive software-engineering portfolio built with React, Next.js, TypeScript, and Vinext. It presents selected backend and full-stack projects, professional experience, technical skills, and contact details.
 
+Live site: [demo-23home.github.io/Portfolio-Website](https://demo-23home.github.io/Portfolio-Website/)
+
 ## Highlights
 
 - Responsive editorial design with light and dark themes
@@ -23,6 +25,12 @@ Open `http://localhost:3000`.
 
 ```bash
 npm run build
+```
+
+GitHub Pages uses the separate static-export build:
+
+```bash
+npm run build:pages
 ```
 
 ## Main stack

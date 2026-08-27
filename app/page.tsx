@@ -14,6 +14,8 @@ const navigation = [
 const heroStack = ['Python', 'Django', 'React', 'Next.js', 'PostgreSQL'];
 const filters = ['All', 'Full-stack', 'Backend'] as const;
 type ProjectFilter = (typeof filters)[number];
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const assetPath = (path: string) => `${basePath}${path}`;
 
 type Project = {
   title: string;
@@ -37,7 +39,7 @@ const projects: Project[] = [
     label: 'Real estate platform',
     description:
       'A full-stack property and transaction workspace pairing a Django REST backend with a focused React dashboard.',
-    image: '/assets/estate.webp',
+    image: assetPath('/assets/estate.webp'),
     imageAlt: 'EstateFlow real estate platform artwork',
     repo: 'https://github.com/Demo-23home/DRF-React-RealStateManagement',
     technologies: ['Django REST', 'React', 'Celery', 'Redis'],
@@ -50,7 +52,7 @@ const projects: Project[] = [
     label: 'Hiring platform',
     description:
       'A DRF and Next.js job platform with role-based flows, applications, résumé uploads, and location-aware search.',
-    image: '/assets/jobs_portal.webp',
+    image: assetPath('/assets/jobs_portal.webp'),
     imageAlt: 'Jobs Portal project artwork',
     repo: 'https://github.com/Demo-23home/DRF_NEXT_Jobs-portal',
     technologies: ['Next.js', 'DRF', 'PostGIS', 'Docker'],
@@ -75,7 +77,7 @@ const projects: Project[] = [
     label: 'Real-time social app',
     description:
       'A real-time connection experience using Django Channels and WebSockets, built around fast, secure interactions.',
-    image: '/assets/project-1.png',
+    image: assetPath('/assets/project-1.png'),
     imageAlt: 'InstantLink project artwork',
     repo: 'https://github.com/Demo-23home/InstantLink',
     technologies: ['Django Channels', 'WebSockets', 'JWT', 'Redis'],
@@ -87,7 +89,7 @@ const projects: Project[] = [
     label: 'Travel product backend',
     description:
       'An API-first travel project created with the Depresso team, centered on clear domain structure and collaboration.',
-    image: '/assets/Rahal.png',
+    image: assetPath('/assets/Rahal.png'),
     imageAlt: 'Rahal mobile travel product screens',
     repo: 'https://github.com/Depresso-Team/Ra7al_API.git',
     technologies: ['Python', 'Django', 'REST API', 'PostgreSQL'],
@@ -100,7 +102,7 @@ const projects: Project[] = [
     label: 'Modular web API',
     description:
       'A Django REST project presented through a polished interface concept, with maintainability at its core.',
-    image: '/assets/fei.png',
+    image: assetPath('/assets/fei.png'),
     imageAlt: 'Fei application interface collage',
     repo: 'https://github.com/Demo-23home/FeiAPI',
     technologies: ['Django', 'DRF', 'Authentication', 'REST'],
@@ -320,7 +322,7 @@ export default function Home() {
               </a>
               <a
                 className="button button-secondary"
-                href="/assets/Zeyad_Salama_Software_Engineer.pdf"
+                href={assetPath('/assets/Zeyad_Salama_Software_Engineer.pdf')}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -337,7 +339,7 @@ export default function Home() {
               <div className="portrait-grid" aria-hidden="true" />
               <div className="portrait-frame">
                 <Image
-                  src="/assets/Zeyad.jpg"
+                  src={assetPath('/assets/Zeyad.jpg')}
                   alt="Zeyad Salama"
                   fill
                   priority
@@ -384,7 +386,7 @@ export default function Home() {
             <div className="about-photo-wrap" data-reveal>
               <div className="about-photo">
                 <Image
-                  src="/assets/Zeyad1.jpg"
+                  src={assetPath('/assets/Zeyad1.jpg')}
                   alt="Zeyad Salama speaking at an event"
                   fill
                   sizes="(max-width: 820px) 100vw, 42vw"
