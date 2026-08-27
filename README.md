@@ -1,34 +1,34 @@
-# Portfolio Website
+# Zeyad Salama — Portfolio
 
-![GitHub last commit](https://img.shields.io/github/last-commit/Demo-23home/Portfolio-Website)
-![GitHub stars](https://img.shields.io/github/stars/Demo-23home/Portfolio-Website?style=social)
+A polished, responsive software-engineering portfolio built with React, Next.js, TypeScript, and Vinext. It presents selected backend and full-stack projects, professional experience, technical skills, and contact details.
 
-This is the repository for my personal portfolio website. It showcases my work, skills, and provides a way to contact me. 
+## Highlights
 
-## Table of Contents
+- Responsive editorial design with light and dark themes
+- Interactive project filtering and mobile navigation
+- Accessible keyboard states and reduced-motion support
+- Optimized local project imagery and social-sharing metadata
+- Cloudflare-compatible Sites deployment configuration
 
-- [Demo](#demo)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+## Local development
 
-## Demo
+```bash
+npm install
+npm run dev
+```
 
-You can view the live demo of the portfolio website [here](https://demo-23home.github.io/Portfolio-Website/).
+Open `http://localhost:3000`.
 
-## Features
+## Production build
 
-- Display information about yourself, including your bio, skills, and contact details.
-- Showcase your projects with descriptions and links.
-- Provide a way for visitors to get in touch with you.
+```bash
+npm run build
+```
 
-## Getting Started
+## Main stack
 
-To get a copy of the project up and running on your local machine, follow these steps:
-
-1. Clone the repository:
-
-   ```sh
-   git clone https://github.com/Demo-23home/Portfolio-Website.git
+- React 19
+- Next.js 16
+- TypeScript
+- Vinext and Vite
+- OpenAI Sites deployment plugin
