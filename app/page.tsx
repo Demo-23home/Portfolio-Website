@@ -12,7 +12,7 @@ const navigation = [
 ];
 
 const heroStack = ['Python', 'Django', 'React', 'Next.js', 'PostgreSQL'];
-const filters = ['All', 'Full-stack', 'Backend'] as const;
+const filters = ['All', 'SaaS', 'Platform', 'Commerce'] as const;
 type ProjectFilter = (typeof filters)[number];
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 const assetPath = (path: string) => `${basePath}${path}`;
@@ -21,129 +21,154 @@ type Project = {
   title: string;
   label: string;
   description: string;
-  image?: string;
-  imageAlt?: string;
-  repo: string;
-  demo?: string;
+  context: string;
+  image: string;
+  imageAlt: string;
   technologies: string[];
+  metrics: string[];
   categories: Exclude<ProjectFilter, 'All'>[];
   accent: string;
   featured?: boolean;
-  contain?: boolean;
-  visual?: 'api';
 };
 
 const projects: Project[] = [
   {
-    title: 'EstateFlow',
-    label: 'Real estate platform',
+    title: 'Multi-Tenant SaaS ERP',
+    label: 'ERP & financial systems',
     description:
-      'A full-stack property and transaction workspace pairing a Django REST backend with a focused React dashboard.',
-    image: assetPath('/assets/estate.webp'),
-    imageAlt: 'EstateFlow real estate platform artwork',
-    repo: 'https://github.com/Demo-23home/DRF-React-RealStateManagement',
-    technologies: ['Django REST', 'React', 'Celery', 'Redis'],
-    categories: ['Full-stack'],
+      'A schema-per-tenant ERP with double-entry accounting, multi-currency COGS, controlled payroll workflows, and transaction-safe financial services.',
+    context: 'Adex · Professional work',
+    image: assetPath('/assets/project-erp.webp'),
+    imageAlt: 'Conceptual multi-tenant ERP and financial operations dashboard',
+    technologies: ['Django', 'PostgreSQL', 'Tenant schemas', 'Transactions'],
+    metrics: ['25+ tenant environments', '100K+ accounting records'],
+    categories: ['SaaS'],
     accent: 'cobalt',
     featured: true,
   },
   {
-    title: 'Jobs Portal',
-    label: 'Hiring platform',
+    title: 'China System',
+    label: 'Multi-tenant B2B trade',
     description:
-      'A DRF and Next.js job platform with role-based flows, applications, résumé uploads, and location-aware search.',
-    image: assetPath('/assets/jobs_portal.webp'),
-    imageAlt: 'Jobs Portal project artwork',
-    repo: 'https://github.com/Demo-23home/DRF_NEXT_Jobs-portal',
-    technologies: ['Next.js', 'DRF', 'PostGIS', 'Docker'],
-    categories: ['Full-stack'],
-    accent: 'lime',
-    featured: true,
-  },
-  {
-    title: 'Recipe API',
-    label: 'Test-driven API',
-    description:
-      'A production-minded recipe service shaped through test-driven development, containerization, and automated delivery.',
-    repo: 'https://github.com/Demo-23home/Recipe-API',
-    demo: 'https://recipe-api-git-prod-zeyad-salamas-projects.vercel.app/',
-    technologies: ['Django REST', 'PostgreSQL', 'Docker', 'CI/CD'],
-    categories: ['Backend'],
+      'A tenant-isolated trade platform with resilient CSV/XLSX imports, automated balance-sheet aggregation, and multi-currency foreign-exchange tracking.',
+    context: 'Adex · Professional work',
+    image: assetPath('/assets/project-china-trade.webp'),
+    imageAlt: 'Conceptual international B2B trade and data import dashboard',
+    technologies: ['Django', 'PostgreSQL', 'CSV/XLSX', 'Financial reporting'],
+    metrics: ['50K+ records per batch', 'Failure-isolated imports'],
+    categories: ['SaaS'],
     accent: 'amber',
-    visual: 'api',
   },
   {
-    title: 'InstantLink',
-    label: 'Real-time social app',
+    title: 'Sahifatty',
+    label: 'Quran learning & assessment',
     description:
-      'A real-time connection experience using Django Channels and WebSockets, built around fast, secure interactions.',
-    image: assetPath('/assets/project-1.png'),
-    imageAlt: 'InstantLink project artwork',
-    repo: 'https://github.com/Demo-23home/InstantLink',
-    technologies: ['Django Channels', 'WebSockets', 'JWT', 'Redis'],
-    categories: ['Full-stack'],
+      'A modular education API for Quran content, assessments, study plans, teacher–student groups, recommendations, onboarding, and secure family accounts.',
+    context: 'Adex · Professional work',
+    image: assetPath('/assets/project-sahifatty.webp'),
+    imageAlt: 'Respectful conceptual Quran learning and assessment platform',
+    technologies: ['Django REST', 'Pytest', 'OAuth & OTP', 'OneSignal'],
+    metrics: ['6,236 verses', 'Weighted progress analytics'],
+    categories: ['Platform'],
+    accent: 'emerald',
+  },
+  {
+    title: 'AquaCloud / Geenade',
+    label: 'Multi-tenant delivery platform',
+    description:
+      'A delivery backend spanning tenants, branches, orders, prepaid-coupon ledgers, real-time notifications, and Celery-powered recurring tours.',
+    context: 'Adex · Professional work',
+    image: assetPath('/assets/project-aquacloud.webp'),
+    imageAlt: 'Conceptual delivery operations, routing, and ledger dashboard',
+    technologies: ['Django REST', 'Channels', 'Celery', 'Redis'],
+    metrics: ['60+ API handlers', '300+ automated tests'],
+    categories: ['SaaS', 'Platform'],
+    accent: 'coral',
+  },
+  {
+    title: 'Barcode Jackets',
+    label: 'Custom apparel commerce',
+    description:
+      'A custom-apparel API with layered garment personalization, multi-store catalogs, inventory reservations, pricing rules, and atomic payment/refund lifecycles.',
+    context: 'Adex · Professional work',
+    image: assetPath('/assets/project-barcode-jackets.webp'),
+    imageAlt: 'Conceptual jacket customization and commerce studio',
+    technologies: ['Django REST', 'SVG engine', 'PostgreSQL', 'OpenAPI'],
+    metrics: ['Layer-based customization', 'Transactional payments'],
+    categories: ['Commerce'],
     accent: 'violet',
   },
   {
-    title: 'Rahal API',
-    label: 'Travel product backend',
+    title: 'Sukoon',
+    label: 'Real estate platform API',
     description:
-      'An API-first travel project created with the Depresso team, centered on clear domain structure and collaboration.',
-    image: assetPath('/assets/Rahal.png'),
-    imageAlt: 'Rahal mobile travel product screens',
-    repo: 'https://github.com/Depresso-Team/Ra7al_API.git',
-    technologies: ['Python', 'Django', 'REST API', 'PostgreSQL'],
-    categories: ['Backend'],
-    accent: 'coral',
-    contain: true,
-  },
-  {
-    title: 'Fei API',
-    label: 'Modular web API',
-    description:
-      'A Django REST project presented through a polished interface concept, with maintainability at its core.',
-    image: assetPath('/assets/fei.png'),
-    imageAlt: 'Fei application interface collage',
-    repo: 'https://github.com/Demo-23home/FeiAPI',
-    technologies: ['Django', 'DRF', 'Authentication', 'REST'],
-    categories: ['Backend'],
-    accent: 'rose',
-    contain: true,
+      'A versioned property-discovery and visit-booking API with hardened authentication, query optimization, Cloudinary media, and Redis-backed WebSockets.',
+    context: 'Freelance project · 2026',
+    image: assetPath('/assets/project-sukoon.webp'),
+    imageAlt: 'Conceptual real estate discovery and visit-booking interface',
+    technologies: ['Django REST', 'PostgreSQL', 'Cloudinary', 'Channels'],
+    metrics: ['100+ automated tests', 'Secure visit booking'],
+    categories: ['Platform'],
+    accent: 'sand',
   },
 ];
 
 const experience = [
   {
-    period: 'Feb — Aug 2025',
+    period: 'Mar 2026 — Present',
+    role: 'Backend Developer',
+    company: 'Adex',
+    description:
+      'Building production backends across multi-tenant ERP, B2B trade, education, delivery, and commerce—covering financial ledgers, secure identity, real-time workflows, and high-volume data.',
+    tag: 'Remote · Amman, Jordan',
+  },
+  {
+    period: 'Jun — Sep 2026',
     role: 'Freelance Backend Developer',
+    company: 'Sukoon',
+    description:
+      'Developed property discovery and visit-booking APIs with JWT/OAuth security, Cloudinary media, Redis-backed WebSockets, query optimization, and 100+ automated tests.',
+    tag: 'Freelance project',
+  },
+  {
+    period: 'Feb — Aug 2025',
+    role: 'Backend Developer',
     company: 'Negm Feed',
     description:
-      'Delivered backend features with an emphasis on secure data flows, maintainable services, and dependable releases.',
-    tag: 'Freelance',
+      'Developed invoicing, payments, client and employee management, balance summaries, and financial reporting APIs; integrated Stripe and WeasyPrint PDF generation.',
+    tag: 'Mansoura, Egypt',
   },
   {
     period: 'Jul — Sep 2023',
-    role: 'Backend Developer Intern',
-    company: 'Information Technology Institute',
+    role: 'Backend Developer',
+    company: 'Information Technology Institute (ITI)',
     description:
-      'Deepened practical Django and API engineering skills through product-focused backend work.',
-    tag: 'Internship',
+      'Built Django features, PostgreSQL schemas, secure REST APIs, and optimized queries using Redis, Docker, and Git.',
+    tag: 'Mansoura, Egypt',
   },
   {
-    period: 'Aug 2022 — Feb 2023',
+    period: 'Oct 2022 — Feb 2023',
     role: 'System Administrator',
     company: 'New Horizons',
     description:
-      'Supported systems and operations, building the infrastructure mindset that now shapes my development work.',
-    tag: 'Operations',
+      'Managed Linux and Windows Server infrastructure, networking, server provisioning, and cloud-related services.',
+    tag: 'Mansoura, Egypt',
   },
   {
     period: 'Aug — Oct 2022',
     role: 'Backend Developer Intern',
     company: 'Mansoura University',
     description:
-      'Built an early foundation in backend development, databases, and collaborative software delivery.',
-    tag: 'Internship',
+      'Developed Django backend modules, REST APIs, and PostgreSQL-backed functionality for academic projects.',
+    tag: 'Mansoura, Egypt',
+  },
+  {
+    period: 'Sep 2020 — Jan 2021',
+    role: 'Networking & Systems Intern',
+    company: 'New Horizons',
+    description:
+      'Completed hands-on training in CCNA networking, MCSA and Windows Server administration, and Linux system administration.',
+    tag: 'Mansoura, Egypt',
   },
 ];
 
@@ -201,8 +226,12 @@ export default function Home() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme === 'dark' || (!savedTheme && prefersDark) ? 'dark' : 'light';
 
-    setTheme(initialTheme);
-    document.documentElement.dataset.theme = initialTheme;
+    const frame = window.requestAnimationFrame(() => {
+      setTheme(initialTheme);
+      document.documentElement.dataset.theme = initialTheme;
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -251,7 +280,15 @@ export default function Home() {
         <span className="scroll-progress" aria-hidden="true" />
 
         <a className="brand" href="#top" aria-label="Zeyad Salama — home" onClick={closeMenu}>
-          <span className="brand-mark">ZS</span>
+          <span className="brand-mark brand-avatar" aria-hidden="true">
+            <Image
+              src={assetPath('/assets/Zeyad-portrait.jpg')}
+              alt=""
+              fill
+              sizes="38px"
+              className="brand-avatar-image"
+            />
+          </span>
           <span className="brand-name">Zeyad Salama</span>
         </a>
 
@@ -312,9 +349,9 @@ export default function Home() {
             </p>
             <h1 id="hero-title">Backend depth.<br />Frontend <em>polish.</em></h1>
             <p className="hero-intro">
-              I&apos;m Zeyad, a software engineer who turns complex systems into fast,
-              thoughtful web products—from resilient Django APIs to refined React
-              and Next.js interfaces.
+              I&apos;m Zeyad, a backend software engineer building secure, transaction-heavy
+              products with Python, Django, and PostgreSQL—from multi-tenant ERP and
+              financial systems to real-time product APIs.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#work">
@@ -334,16 +371,16 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="hero-visual" data-reveal aria-label="Portrait of Zeyad Salama">
+          <div className="hero-visual" data-reveal>
             <div className="portrait-shell">
               <div className="portrait-grid" aria-hidden="true" />
               <div className="portrait-frame">
                 <Image
-                  src={assetPath('/assets/Zeyad.jpg')}
-                  alt="Zeyad Salama"
+                  src={assetPath('/assets/Zeyad-portrait.jpg')}
+                  alt="Zeyad Salama wearing a light gray suit"
                   fill
                   priority
-                  sizes="(max-width: 900px) 85vw, 38vw"
+                  sizes="(max-width: 1020px) 82vw, 38vw"
                   className="portrait-image"
                 />
               </div>
@@ -360,7 +397,7 @@ export default function Home() {
 
         <section className="proof-strip" aria-label="Portfolio highlights" data-reveal>
           <p>Built for the whole product</p>
-          <div className="proof-item"><strong>04</strong><span>professional roles</span></div>
+          <div className="proof-item"><strong>07</strong><span>professional roles</span></div>
           <div className="proof-item"><strong>06</strong><span>selected projects</span></div>
           <div className="proof-item"><strong>∞</strong><span>room to keep learning</span></div>
         </section>
@@ -386,8 +423,8 @@ export default function Home() {
             <div className="about-photo-wrap" data-reveal>
               <div className="about-photo">
                 <Image
-                  src={assetPath('/assets/Zeyad1.jpg')}
-                  alt="Zeyad Salama speaking at an event"
+                  src={assetPath('/assets/Zeyad.jpg')}
+                  alt="Zeyad Salama at the Arab Collegiate Programming Contest"
                   fill
                   sizes="(max-width: 820px) 100vw, 42vw"
                   className="about-image"
@@ -397,18 +434,18 @@ export default function Home() {
             </div>
             <div className="about-copy" data-reveal>
               <p className="about-lead">
-                I&apos;m a backend-focused software engineer with a growing full-stack
-                toolkit. My sweet spot is translating complex requirements into
-                simple, dependable products.
+                I&apos;m a backend software engineer specializing in Python, Django,
+                Django REST Framework, and PostgreSQL. My sweet spot is turning
+                complex business rules into dependable product systems.
               </p>
               <p>
-                I work across API architecture, authentication, asynchronous jobs,
-                databases, deployment, and the React interfaces that bring those
-                systems to life. I care about clear code, measured decisions, and
-                leaving every product easier to evolve.
+                I&apos;ve worked across multi-tenant SaaS, ERP, finance, delivery,
+                education, e-commerce, and real estate—designing transactional
+                workflows, secure authentication, real-time systems, background jobs,
+                tests, and production-ready APIs that remain clear as they grow.
               </p>
               <dl className="about-facts">
-                <div><dt>Education</dt><dd>B.Sc. Computer & Information Sciences</dd></div>
+                <div><dt>Education</dt><dd>B.Sc. Computer & Information Sciences · 2020–2024</dd></div>
                 <div><dt>Focus</dt><dd>Software Engineering · Mansoura University</dd></div>
                 <div><dt>Based in</dt><dd>Egypt · Open to remote collaboration</dd></div>
               </dl>
@@ -447,40 +484,25 @@ export default function Home() {
               >
                 <div className="project-media">
                   <span className="project-count">0{projects.indexOf(project) + 1}</span>
-                  {project.image ? (
-                    <Image
-                      src={project.image}
-                      alt={project.imageAlt ?? ''}
-                      fill
-                      sizes={project.featured ? '(max-width: 820px) 100vw, 56vw' : '(max-width: 820px) 100vw, 38vw'}
-                      className={`project-image ${project.contain ? 'is-contained' : ''}`}
-                    />
-                  ) : project.visual === 'api' ? (
-                    <div className="api-visual" aria-label="Recipe API endpoint preview">
-                      <p><span>POST</span> /api/recipes/</p>
-                      <p><span>GET</span> /api/recipes/:id</p>
-                      <p><span>PATCH</span> /api/recipes/:id</p>
-                      <strong>{'{ REST }'}</strong>
-                    </div>
-                  ) : null}
+                  <Image
+                    src={project.image}
+                    alt={project.imageAlt}
+                    fill
+                    sizes={project.featured ? '(max-width: 1020px) 100vw, 56vw' : '(max-width: 820px) 100vw, 38vw'}
+                    className="project-image"
+                  />
                 </div>
                 <div className="project-body">
                   <p className="project-label">{project.label}</p>
                   <h3>{project.title}</h3>
                   <p className="project-description">{project.description}</p>
+                  <ul className="project-metrics" aria-label={`${project.title} project highlights`}>
+                    {project.metrics.map((metric) => <li key={metric}>{metric}</li>)}
+                  </ul>
                   <ul className="project-technologies" aria-label={`${project.title} technologies`}>
                     {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                   </ul>
-                  <div className="project-links">
-                    <a href={project.repo} target="_blank" rel="noreferrer">
-                      GitHub <span aria-hidden="true">↗</span>
-                    </a>
-                    {project.demo ? (
-                      <a href={project.demo} target="_blank" rel="noreferrer">
-                        Live site <span aria-hidden="true">↗</span>
-                      </a>
-                    ) : null}
-                  </div>
+                  <p className="project-context"><span aria-hidden="true" />{project.context}</p>
                 </div>
               </article>
             ))}
@@ -494,8 +516,9 @@ export default function Home() {
               <h2>A path built through <em>practice.</em></h2>
             </div>
             <p>
-              From systems support to backend delivery, each role sharpened how I
-              think about reliable software and the people who use it.
+              From infrastructure and systems administration to production backend
+              architecture, each role sharpened how I build secure, observable, and
+              transaction-safe software.
             </p>
           </div>
           <div className="timeline">
@@ -570,7 +593,16 @@ export default function Home() {
 
       <footer className="site-footer">
         <a className="brand footer-brand" href="#top" aria-label="Back to top">
-          <span className="brand-mark">ZS</span><span className="brand-name">Zeyad Salama</span>
+          <span className="brand-mark brand-avatar" aria-hidden="true">
+            <Image
+              src={assetPath('/assets/Zeyad-portrait.jpg')}
+              alt=""
+              fill
+              sizes="34px"
+              className="brand-avatar-image"
+            />
+          </span>
+          <span className="brand-name">Zeyad Salama</span>
         </a>
         <p>Software engineer · Backend depth, frontend polish.</p>
         <p>© {new Date().getFullYear()} Zeyad Salama</p>

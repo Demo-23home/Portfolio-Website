@@ -20,9 +20,9 @@ const publicAsset = (path: string) => `${basePath}${path}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Zeyad Salama — Full-Stack Software Engineer',
+  title: 'Zeyad Salama — Backend Software Engineer',
   description:
-    'Portfolio of Zeyad Salama, a software engineer building reliable backend systems and polished web experiences with Django, React, and Next.js.',
+    'Portfolio of Zeyad Salama, a backend software engineer building secure, transaction-heavy products with Python, Django, Django REST Framework, and PostgreSQL.',
   alternates: {
     canonical: pageUrl,
   },
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     icon: publicAsset('/assets/code.png'),
   },
   openGraph: {
-    title: 'Zeyad Salama — Full-Stack Software Engineer',
-    description: 'Backend depth. Frontend polish. Explore selected software engineering work by Zeyad Salama.',
+    title: 'Zeyad Salama — Backend Software Engineer',
+    description: 'Backend depth. Product thinking. Explore selected software engineering work by Zeyad Salama.',
     url: pageUrl,
     siteName: 'Zeyad Salama — Portfolio',
     type: 'website',
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Zeyad Salama — Full-Stack Software Engineer',
-    description: 'Backend depth. Frontend polish. Explore selected software engineering work by Zeyad Salama.',
+    title: 'Zeyad Salama — Backend Software Engineer',
+    description: 'Backend depth. Product thinking. Explore selected software engineering work by Zeyad Salama.',
     images: [publicAsset('/og.png')],
   },
 };
