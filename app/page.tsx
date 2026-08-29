@@ -79,10 +79,10 @@ const projects: Project[] = [
     featured: true,
   },
   {
-    title: 'China System',
+    title: 'China ERP Systems',
     label: 'Multi-tenant B2B trade',
     description:
-      'A tenant-isolated trade platform with resilient CSV/XLSX imports, automated balance-sheet aggregation, and multi-currency foreign-exchange tracking.',
+      'A tenant-isolated trade platform per company with resilient CSV/XLSX imports, automated balance-sheet aggregation, and multi-currency foreign-exchange tracking.',
     image: assetPath('/assets/project-china-trade.webp'),
     imageAlt: 'Conceptual international B2B trade and data import dashboard',
     technologies: ['Django', 'PostgreSQL', 'CSV/XLSX', 'Financial reporting'],
@@ -167,15 +167,15 @@ const experience = [
     company: 'Adex',
     description:
       'Building production backends across multi-tenant ERP, B2B trade, education, delivery, and commerce—covering financial ledgers, secure identity, real-time workflows, and high-volume data.',
-    tag: 'Remote · Amman, Jordan',
+    tag: 'Amman, Jordan',
   },
   {
     period: 'Jun — Sep 2026',
-    role: 'Freelance Backend Developer',
+    role: 'Backend Developer',
     company: 'Sukoon',
     description:
       'Developed property discovery and visit-booking APIs with JWT/OAuth security, Cloudinary media, Redis-backed WebSockets, query optimization, and 100+ automated tests.',
-    tag: 'Freelance project',
+    tag: 'Egypt',
   },
   {
     period: 'Feb — Aug 2025',
@@ -652,7 +652,7 @@ export default function Home() {
           </div>
           <div className="projects-modal-grid" aria-live="polite">
             {filteredProjects.map((project, index) => (
-              <ProjectCard project={project} index={index} inDialog key={project.title} />
+                <ProjectCard project={project} index={index} inDialog key={project.title} />
             ))}
           </div>
         </dialog>
