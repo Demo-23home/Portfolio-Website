@@ -51,11 +51,10 @@ type Project = {
   title: string;
   label: string;
   description: string;
-  context: string;
   image: string;
   imageAlt: string;
   technologies: string[];
-  metrics: string[];
+  stats: { value: string; label: string }[];
   categories: Exclude<ProjectFilter, 'All'>[];
   accent: string;
   featured?: boolean;
@@ -67,11 +66,14 @@ const projects: Project[] = [
     label: 'ERP & financial systems',
     description:
       'A schema-per-tenant ERP with double-entry accounting, multi-currency COGS, controlled payroll workflows, and transaction-safe financial services.',
-    context: 'Adex · Professional work',
     image: assetPath('/assets/project-erp.webp'),
     imageAlt: 'Conceptual multi-tenant ERP and financial operations dashboard',
     technologies: ['Django', 'PostgreSQL', 'Tenant schemas', 'Transactions'],
-    metrics: ['25+ tenant environments', '100K+ accounting records'],
+    stats: [
+      { value: '25+', label: 'Tenant environments' },
+      { value: '100K+', label: 'Accounting records' },
+      { value: 'Multi', label: 'Currency ledgers' },
+    ],
     categories: ['SaaS'],
     accent: 'cobalt',
     featured: true,
@@ -81,11 +83,14 @@ const projects: Project[] = [
     label: 'Multi-tenant B2B trade',
     description:
       'A tenant-isolated trade platform with resilient CSV/XLSX imports, automated balance-sheet aggregation, and multi-currency foreign-exchange tracking.',
-    context: 'Adex · Professional work',
     image: assetPath('/assets/project-china-trade.webp'),
     imageAlt: 'Conceptual international B2B trade and data import dashboard',
     technologies: ['Django', 'PostgreSQL', 'CSV/XLSX', 'Financial reporting'],
-    metrics: ['50K+ records per batch', 'Failure-isolated imports'],
+    stats: [
+      { value: '50K+', label: 'Rows per batch' },
+      { value: '2', label: 'Import formats' },
+      { value: 'Isolated', label: 'Import failures' },
+    ],
     categories: ['SaaS'],
     accent: 'amber',
   },
@@ -94,11 +99,14 @@ const projects: Project[] = [
     label: 'Quran learning & assessment',
     description:
       'A modular education API for Quran content, assessments, study plans, teacher–student groups, recommendations, onboarding, and secure family accounts.',
-    context: 'Adex · Professional work',
     image: assetPath('/assets/project-sahifatty.webp'),
     imageAlt: 'Respectful conceptual Quran learning and assessment platform',
     technologies: ['Django REST', 'Pytest', 'OAuth & OTP', 'OneSignal'],
-    metrics: ['6,236 verses', 'Weighted progress analytics'],
+    stats: [
+      { value: '6,236', label: 'Quran verses' },
+      { value: 'Weighted', label: 'Progress model' },
+      { value: 'Secure', label: 'Family accounts' },
+    ],
     categories: ['Platform'],
     accent: 'emerald',
   },
@@ -107,11 +115,14 @@ const projects: Project[] = [
     label: 'Multi-tenant delivery platform',
     description:
       'A delivery backend spanning tenants, branches, orders, prepaid-coupon ledgers, real-time notifications, and Celery-powered recurring tours.',
-    context: 'Adex · Professional work',
     image: assetPath('/assets/project-aquacloud.webp'),
     imageAlt: 'Conceptual delivery operations, routing, and ledger dashboard',
     technologies: ['Django REST', 'Channels', 'Celery', 'Redis'],
-    metrics: ['60+ API handlers', '300+ automated tests'],
+    stats: [
+      { value: '60+', label: 'API handlers' },
+      { value: '300+', label: 'Automated tests' },
+      { value: 'Real-time', label: 'Notifications' },
+    ],
     categories: ['SaaS', 'Platform'],
     accent: 'coral',
   },
@@ -120,11 +131,14 @@ const projects: Project[] = [
     label: 'Custom apparel commerce',
     description:
       'A custom-apparel API with layered garment personalization, multi-store catalogs, inventory reservations, pricing rules, and atomic payment/refund lifecycles.',
-    context: 'Adex · Professional work',
     image: assetPath('/assets/project-barcode-jackets.webp'),
     imageAlt: 'Conceptual jacket customization and commerce studio',
     technologies: ['Django REST', 'SVG engine', 'PostgreSQL', 'OpenAPI'],
-    metrics: ['Layer-based customization', 'Transactional payments'],
+    stats: [
+      { value: 'Layered', label: 'Customization' },
+      { value: 'Multi-store', label: 'Catalog model' },
+      { value: 'Atomic', label: 'Payments & refunds' },
+    ],
     categories: ['Commerce'],
     accent: 'violet',
   },
@@ -133,11 +147,14 @@ const projects: Project[] = [
     label: 'Real estate platform API',
     description:
       'A versioned property-discovery and visit-booking API with hardened authentication, query optimization, Cloudinary media, and Redis-backed WebSockets.',
-    context: 'Freelance project · 2026',
     image: assetPath('/assets/project-sukoon.webp'),
     imageAlt: 'Conceptual real estate discovery and visit-booking interface',
     technologies: ['Django REST', 'PostgreSQL', 'Cloudinary', 'Channels'],
-    metrics: ['100+ automated tests', 'Secure visit booking'],
+    stats: [
+      { value: '100+', label: 'Automated tests' },
+      { value: 'Real-time', label: 'WebSockets' },
+      { value: 'Versioned', label: 'API contract' },
+    ],
     categories: ['Platform'],
     accent: 'sand',
   },
@@ -528,13 +545,17 @@ export default function Home() {
                   <p className="project-label">{project.label}</p>
                   <h3>{project.title}</h3>
                   <p className="project-description">{project.description}</p>
-                  <ul className="project-metrics" aria-label={`${project.title} project highlights`}>
-                    {project.metrics.map((metric) => <li key={metric}>{metric}</li>)}
-                  </ul>
                   <ul className="project-technologies" aria-label={`${project.title} technologies`}>
                     {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
                   </ul>
-                  <p className="project-context"><span aria-hidden="true" />{project.context}</p>
+                  <dl className="project-stats" aria-label={`${project.title} project statistics`}>
+                    {project.stats.map((stat) => (
+                      <div key={stat.label}>
+                        <dt>{stat.label}</dt>
+                        <dd>{stat.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
                 </div>
               </article>
             ))}
