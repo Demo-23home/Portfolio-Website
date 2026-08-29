@@ -163,7 +163,7 @@ const projects: Project[] = [
 const experience = [
   {
     period: 'Mar 2026 — Present',
-    role: 'Backend Developer',
+    role: 'Full Stack Developer',
     company: 'Adex',
     description:
       'Building production backends across multi-tenant ERP, B2B trade, education, delivery, and commerce—covering financial ledgers, secure identity, real-time workflows, and high-volume data.',
@@ -178,7 +178,15 @@ const experience = [
     tag: 'Egypt',
   },
   {
-    period: 'Feb — Aug 2025',
+    period: 'Jan — Mar 2026',
+    role: 'Full Stack Developer',
+    company: 'Freelance',
+    description:
+      'Delivered full-stack web applications, pairing Django APIs and PostgreSQL data models with responsive React and Next.js interfaces.',
+    tag: 'Remote · Egypt',
+  },
+  {
+    period: 'Oct 2024 — Mar 2025',
     role: 'Backend Developer',
     company: 'Negm Feed',
     description:
@@ -187,7 +195,7 @@ const experience = [
   },
   {
     period: 'Jul — Sep 2023',
-    role: 'Backend Developer',
+    role: 'Full Stack Developer',
     company: 'Information Technology Institute (ITI)',
     description:
       'Built Django features, PostgreSQL schemas, secure REST APIs, and optimized queries using Redis, Docker, and Git.',
