@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 
 const navigation = [
@@ -255,10 +255,60 @@ const skillGroups = [
   },
 ];
 
+type ProjectCardProps = {
+  project: Project;
+  index: number;
+  inDialog?: boolean;
+};
+
+function ProjectCard({ project, index, inDialog = false }: ProjectCardProps) {
+  return (
+    <article
+      className={`project-card ${project.featured ? 'is-featured' : ''} accent-${project.accent}`}
+      data-reveal={inDialog ? undefined : true}
+      style={inDialog ? undefined : { '--delay': `${Math.min(index, 4) * 70}ms` } as CSSProperties}
+    >
+      <div className="project-media">
+        <span className="project-count">0{projects.indexOf(project) + 1}</span>
+        <Image
+          src={project.image}
+          alt={project.imageAlt}
+          fill
+          sizes={inDialog
+            ? '(max-width: 820px) 100vw, 46vw'
+            : project.featured
+              ? '(max-width: 1020px) 100vw, 56vw'
+              : '(max-width: 820px) 100vw, 38vw'}
+          className="project-image"
+        />
+      </div>
+      <div className="project-body">
+        <p className="project-label">{project.label}</p>
+        <h3>{project.title}</h3>
+        <p className="project-description">{project.description}</p>
+        <ul className="project-technologies" aria-label={`${project.title} technologies`}>
+          {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
+        </ul>
+        <dl className="project-stats" aria-label={`${project.title} project statistics`}>
+          {project.stats.map((stat) => (
+            <div key={stat.label}>
+              <dt>{stat.label}</dt>
+              <dd>{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </article>
+  );
+}
+
 export default function Home() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>('All');
+  const [projectsOpen, setProjectsOpen] = useState(false);
+  const projectsDialogRef = useRef<HTMLDialogElement>(null);
+  const viewAllProjectsRef = useRef<HTMLButtonElement>(null);
 
   const filteredProjects = useMemo(
     () =>
@@ -267,6 +317,7 @@ export default function Home() {
         : projects.filter((project) => project.categories.includes(activeFilter)),
     [activeFilter],
   );
+  const visibleProjects = projects.slice(0, 3);
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem('portfolio-theme');
@@ -310,7 +361,25 @@ export default function Home() {
 
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [activeFilter]);
+  }, []);
+
+  useEffect(() => {
+    const dialog = projectsDialogRef.current;
+    if (!dialog) return;
+
+    if (projectsOpen && !dialog.open) dialog.showModal();
+    if (!projectsOpen && dialog.open) dialog.close();
+  }, [projectsOpen]);
+
+  useEffect(() => {
+    if (!projectsOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [projectsOpen]);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -508,7 +577,66 @@ export default function Home() {
               <p className="eyebrow"><span>02</span> Selected work</p>
               <h2>Products with a strong <em>backbone.</em></h2>
             </div>
-            <div className="project-filters" role="group" aria-label="Filter projects">
+          </div>
+
+          <div className="projects-grid" aria-live="polite">
+            {visibleProjects.map((project, index) => (
+              <ProjectCard project={project} index={index} key={project.title} />
+            ))}
+          </div>
+
+          <div className="projects-actions" data-reveal>
+            <button
+              className="button button-primary view-all-projects"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="projects-dialog"
+              ref={viewAllProjectsRef}
+              onClick={() => setProjectsOpen(true)}
+            >
+              View all projects <span aria-hidden="true">0{projects.length} ↗</span>
+            </button>
+          </div>
+        </section>
+
+        <dialog
+          className="projects-dialog"
+          id="projects-dialog"
+          ref={projectsDialogRef}
+          aria-labelledby="projects-dialog-title"
+          aria-describedby="projects-dialog-description"
+          onCancel={() => setProjectsOpen(false)}
+          onClose={() => {
+            setProjectsOpen(false);
+            window.requestAnimationFrame(() => viewAllProjectsRef.current?.focus());
+          }}
+          onClick={(event) => {
+            if (event.target !== event.currentTarget) return;
+            const bounds = event.currentTarget.getBoundingClientRect();
+            const clickedOutside = event.clientX < bounds.left
+              || event.clientX > bounds.right
+              || event.clientY < bounds.top
+              || event.clientY > bounds.bottom;
+            if (clickedOutside) setProjectsOpen(false);
+          }}
+        >
+          <div className="projects-dialog-header">
+            <div>
+              <p className="eyebrow"><span>06</span> Complete project archive</p>
+              <h2 id="projects-dialog-title">All selected projects.</h2>
+              <p id="projects-dialog-description">
+                Explore the full collection of SaaS, platform, and commerce systems.
+              </p>
+            </div>
+            <button
+              className="projects-dialog-close"
+              type="button"
+              aria-label="Close all projects"
+              onClick={() => setProjectsOpen(false)}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <div className="project-filters modal-project-filters" role="group" aria-label="Filter all projects">
               {filters.map((filter) => (
                 <button
                   key={filter}
@@ -522,45 +650,12 @@ export default function Home() {
               ))}
             </div>
           </div>
-
-          <div className="projects-grid" aria-live="polite">
+          <div className="projects-modal-grid" aria-live="polite">
             {filteredProjects.map((project, index) => (
-              <article
-                className={`project-card ${project.featured ? 'is-featured' : ''} accent-${project.accent}`}
-                key={project.title}
-                data-reveal
-                style={{ '--delay': `${Math.min(index, 4) * 70}ms` } as CSSProperties}
-              >
-                <div className="project-media">
-                  <span className="project-count">0{projects.indexOf(project) + 1}</span>
-                  <Image
-                    src={project.image}
-                    alt={project.imageAlt}
-                    fill
-                    sizes={project.featured ? '(max-width: 1020px) 100vw, 56vw' : '(max-width: 820px) 100vw, 38vw'}
-                    className="project-image"
-                  />
-                </div>
-                <div className="project-body">
-                  <p className="project-label">{project.label}</p>
-                  <h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  <ul className="project-technologies" aria-label={`${project.title} technologies`}>
-                    {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                  </ul>
-                  <dl className="project-stats" aria-label={`${project.title} project statistics`}>
-                    {project.stats.map((stat) => (
-                      <div key={stat.label}>
-                        <dt>{stat.label}</dt>
-                        <dd>{stat.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-              </article>
+              <ProjectCard project={project} index={index} inDialog key={project.title} />
             ))}
           </div>
-        </section>
+        </dialog>
 
         <section className="experience section-shell" id="experience">
           <div className="experience-intro" data-reveal>
